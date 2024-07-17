@@ -1,0 +1,14 @@
+[project]
+name = "transparent-background-comfyui"
+description = "Removes background using Transparent Background"
+version = "1.0.0"
+license = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/mikebilly/Transparent-background-comfyUI"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = "ducmanh"
+DisplayName = "transparent-background-comfyui"
+Icon = ""
