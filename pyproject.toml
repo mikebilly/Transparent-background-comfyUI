@@ -1,7 +1,7 @@
 [project]
 name = "transparent-background-comfyui"
 description = "Removes background using Transparent Background"
-version = "1.0.0"
+version = "1.0.1"
 license = "LICENSE"
 
 [project.urls]
