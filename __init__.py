@@ -3,7 +3,7 @@ import torchvision.transforms.v2 as T
 from PIL import Image
 import torch
 import numpy as np
-​
+
 class TransparentBackgroundRembg:
     def __init__(self):
         pass
@@ -16,12 +16,12 @@ class TransparentBackgroundRembg:
                 "model_path": ("STRING", {"default": "/kaggle/working/latest.pth", "multiline": False}),
             },
         }
-​
+
     RETURN_TYPES = ("IMAGE", "MASK", "IMAGE")
     RETURN_NAMES = ("Foreground", "Mask", "Foreground_Transparent")
     FUNCTION = "remove_background"
     CATEGORY = "image"
-​
+
     def remove_background(self, image: torch.Tensor, model_path: str):
         remover = Remover(mode='base-nightly', ckpt=model_path, device='cuda:0')
         bgrgba = None
@@ -36,7 +36,7 @@ class TransparentBackgroundRembg:
         output = torch.stack(output, dim=0)
         output = output.permute([0, 2, 3, 1])
 #         mask = output[:, :, :, 3] if output.shape[3] == 4 else torch.ones_like(output[:, :, :, 0])
-​
+
 #         if output.shape[3] == 4:
 #             print("Has 4 channels")
 #             # Extract the RGB channels and the alpha channel separately
@@ -50,7 +50,7 @@ class TransparentBackgroundRembg:
 #             mask = torch.ones_like(output[:, :, :, 0])  # Create a mask of ones
 #         return(output_rgb, mask,)
         
-​
+
         if output.shape[3] == 4:
             print("Has 4 channels")
             alpha_channel = output[:, :, :, 3]
@@ -62,9 +62,9 @@ class TransparentBackgroundRembg:
             print("Has: {}".format(output.shape[3]))
             output_rgb = output
             mask = torch.ones_like(output[:, :, :, 0])  # Create a mask of ones
-​
+
         return output_rgb, mask, output
-​
+
 NODE_CLASS_MAPPINGS = {
     "Transparentbackground RemBg": TransparentBackgroundRembg
 }
